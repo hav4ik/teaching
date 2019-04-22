@@ -1,0 +1,57 @@
+---
+---
+
+{% include layout.css %}
+
+.navbar {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid rgb(231, 231, 231);
+}
+
+.collapse {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.navbar-collapse {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.navbar-correct {
+  padding-top: 70px;
+}
+
+.sticky-correct {
+  padding-top: 20px;
+}
+
+.btnlinks {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* don't wrap inline code */
+p code,
+table code {
+  white-space: nowrap;
+}
+
+.container {
+  max-width: 1000px;
+  /*padding-top: 40px;
+  padding-bottom: 40px;*/
+}
+
+footer {
+  margin-top: 50px;
+  text-align: center;
+}
+
+/* large screens */
+@media (min-width: 768px) {
+  h1:first-child {
+    margin-top: 0;
+  }
+}
