@@ -1,3 +1,4 @@
+base_url: https://hav4ik.github.io/teaching/
 markdown: kramdown
 kramdown:
   parse_block_html: true
