@@ -26,10 +26,6 @@ title: 1. Снижение размерности данных
 ```python
 from sklearn.datasets import fetch_openml
 images, labels = fetch_openml('mnist_784', version=1, return_X_y=True)
-
-from sklearn.preprocessing import StandardScaler
-X, Y = images[:6000], labels[:6000]
-X_std = StandardScaler().fit_transform(X)
 ```
 
 Перед тем как приступить работу с данными, всегда полезно глянуть глазами как оно вообще выглядит. 
@@ -63,6 +59,8 @@ for digit in range(10):
 
 ### Собственные значения и вектора
 
+{% include_relative eigenvals.html %}
+
 
 <img src="eigenvecs.png" alt="drawing" width="100%"/>
 
@@ -91,15 +89,19 @@ X_nd = pca.transform(X_std)
 
 
 
-### Кластеризация методом $$k$$-средних
+### Кластеризация методом k-средних
 
 {% include_relative k-means.html %}
 
 ## Линейный дискриминатор Фишера (LDA)
 
+### Визуализация
+
 {% include_relative lda.html %}
 
 ## Стохастическое вложение соседей (T-SNE)
+
+### Визуализация
 
 {% include_relative t-sne.html %}
 
