@@ -4,8 +4,8 @@ collection: pattern-recognition
 title: 1. Снижение размерности данных
 ---
 
-[![Open In Colab](/assets/badges/colab-badge.svg)](https://colab.research.google.com/drive/1FI2d2_WbCRL9dz03HTkJ85LVvgEmGNL3)
-[![Open In Colab](/assets/badges/github.svg)](#)
+[![Open In Colab]({{ site.baseurl }}/assets/badges/colab-badge.svg)](https://colab.research.google.com/drive/1FI2d2_WbCRL9dz03HTkJ85LVvgEmGNL3)
+[![Github]({{ site.baseurl }}/assets/badges/github.svg)](#)
 
 Данный материал является дополнением к [лекциям проф. Клюшин Д. А.][klyushin] по распознаванию образов, а именно &mdash; к лекции о [линейном дискриминаторе Фишера][klyushin-lda]. В данном разделе, мы глубже рассмотрим данный алгоритм на примере проблемы снижения размерности данных базы [MNIST][mnist] вручную написанных цифр, а так же другие методы, а именно:
 
