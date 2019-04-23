@@ -1,7 +1,8 @@
 ---
+title: 1. Снижение размерности данных
 layout: chapter
 collection: pattern-recognition
-title: 1. Снижение размерности данных
+order: 1
 ---
 
 [![Open In Colab]({{ site.baseurl }}/assets/badges/colab-badge.svg)](https://colab.research.google.com/drive/1FI2d2_WbCRL9dz03HTkJ85LVvgEmGNL3)

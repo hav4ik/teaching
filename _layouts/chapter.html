@@ -83,7 +83,9 @@
         <div class="collapse navbar-collapse col-md-9" id="navbarNavAltMarkup">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link active" href="#">
+              {% assign collection_pages = site.pages | where: 'collection', page.collection %}
+              {% assign main_page = collection_pages | sort: 'order' | first %}
+              <a class="nav-link active" href="{{ site.baseurl }}{{ main_page.url }}">
                 Главная
               </a>
             </li>
@@ -92,18 +94,29 @@
                 Содержание
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                {% for p in site.pages %}
-                  {% if p.collection == page.collection %}
-                    <a class="dropdown-item" href="{{ p.url }}">{{ p.title }}</a>
-                  {% endif %}
+                {% assign collection_pages = site.pages | where: 'collection', page.collection %}
+                {% assign collection_sorted = collection_pages | sort: 'order' %}
+                {% for p in collection_sorted %}
+                  <a class="dropdown-item" href="{{ site.baseurl }}{{ p.url }}">{{ p.title }}</a>
                 {% endfor %}
               </div>
             </li>
           </ul>
           <div class="navbar-nav ml-auto">
-            <a class="nav-item nav-link" href="#">
-              Следующая глава <i class="fas fa-caret-right"></i>
-            </a>
+            {% assign collection_pages = site.pages | where: 'collection', page.collection | where_exp: 'item', 'item.order < page.order' %}
+            {% assign next_page = collection_pages | sort: 'order' | last %}
+            {% if next_page %}
+              <a class="nav-item nav-link" href="{{ site.baseurl }}{{ next_page.url }}">
+                <i class="fas fa-caret-left"></i> Предыдущая
+              </a>
+            {% endif %}
+            {% assign collection_pages = site.pages | where: 'collection', page.collection | where_exp: 'item', 'item.order > page.order'%}
+            {% assign next_page = collection_pages | sort: 'order' | first %}
+            {% if next_page %}
+              <a class="nav-item nav-link" href="{{ site.baseurl }}{{ next_page.url }}">
+                Следующая <i class="fas fa-caret-right"></i>
+              </a>
+            {% endif %}
           </div>
         </div>
       </div><!-- container -->
