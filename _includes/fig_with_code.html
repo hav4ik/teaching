@@ -1,0 +1,14 @@
+{% assign code = include.code %}
+{% assign fig = include.fig %}
+{% assign id = include.id %}
+
+<hr class="zero-margin">
+<button class="btn btn-primary btn-sm zero-margin" type="button" data-toggle="collapse" data-target="#{{ id }}" aria-expanded="false" aria-controls="{{ id }}">
+  <i class="fas fa-angle-down"></i> показать исходники
+</button>
+<div class="collapse markdown-1" id="{{ id }}">
+{{ code | markdownify }}
+</div>
+
+{{ fig | markdownify }}
+<hr>

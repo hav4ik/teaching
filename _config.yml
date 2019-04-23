@@ -1,6 +1,8 @@
 baseurl: /teaching
 markdown: kramdown
+highlighter: rouge
 kramdown:
+  input: GFM
   parse_block_html: true
 exclude:
   - node_modules/
