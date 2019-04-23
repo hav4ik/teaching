@@ -31,10 +31,10 @@ images, labels = fetch_openml('mnist_784', version=1, return_X_y=True)
 Перед тем как приступить работу с данными, всегда полезно глянуть глазами как оно вообще выглядит. 
 
 <hr class="zero-everything">
-<button class="btn btn-primary btn-sm " type="button" data-toggle="collapse" data-target="#collapseMNISTvis" aria-expanded="false" aria-controls="collapseMNISTvis">
+<button class="btn btn-primary btn-sm " type="button" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
 	<i class="fas fa-angle-down"></i> показать исходники
 </button>
-<div class="collapse markdown-1" id="collapseMNISTvis">
+<div class="collapse markdown-1" id="collapse1">
 
 ```python
 import matplotlib.pyplot as plt
@@ -59,11 +59,57 @@ for digit in range(10):
 
 ### Собственные значения и вектора
 
-{% include_relative eigenvals.html %}
+Перед тем как приступать с следующим действиям, неплохо было бы нормализировать наши данные. Ведь они пока лежат в диапазоне `0 .. 255` &mdash; неочень удобный диапазон. Так же, поскольку у нас ограниченное количество вычислительной мощности, будем ограничиваться лишь `6000` семплами датасета.
 
+```python
+from sklearn.preprocessing import StandardScaler
+X_std = StandardScaler().fit_transform(X)
+X, Y = images[:6000], Y = labels[:6000]
+```
+
+<hr class="zero-everything">
+<button class="btn btn-primary btn-sm " type="button" data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+	<i class="fas fa-angle-down"></i> показать исходники
+</button>
+<div class="collapse markdown-1" id="collapse2">
+
+```python
+# Calculating Eigenvectors and eigenvalues of Cov matirx
+cov_mat = np.cov(X_std.T)
+eig_vals, eig_vecs = np.linalg.eigh(cov_mat)
+
+# Sort indices by the descendance of eigenvalues
+idx = np.flip(np.argsort(eig_vals))
+
+# Calculation of Explained Variance from the eigenvalues
+var_exp = 100 * eig_vals[idx[:100]] / eig_vals.sum() # Individual explained variance
+cum_var_exp = np.cumsum(var_exp) # Cumulative explained variance
+```
+</div>
+
+{% include_relative eigenvals.html %}
+<hr>
+
+
+<hr class="zero-everything">
+<button class="btn btn-primary btn-sm " type="button" data-toggle="collapse" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+	<i class="fas fa-angle-down"></i> показать исходники
+</button>
+<div class="collapse markdown-1" id="collapse3">
+
+```python
+n_row, n_col = 4, 8
+plt.figure(figsize=(15,8))
+for i in range(n_row * n_col):
+    plt.subplot(n_row, n_col, i+1)
+    plt.imshow(eig_vecs.T[idx][i].reshape(28, 28))
+    plt.title('Eigenvector {}'.format(i+1), size=8)
+    plt.xticks(()), plt.yticks(())
+```
+</div>
 
 <img src="eigenvecs.png" alt="drawing" width="100%"/>
-
+<hr>
 
 ## Метод главных компонент (PCA)
 
@@ -71,17 +117,17 @@ for digit in range(10):
 ### Визуализация
 
 <hr class="zero-everything">
-<button class="btn btn-primary btn-sm " type="button" data-toggle="collapse" data-target="#collapsePCAvis" aria-expanded="false" aria-controls="collapsePCAvis">
+<button class="btn btn-primary btn-sm " type="button" data-toggle="collapse" data-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
 	<i class="fas fa-angle-down"></i> показать исходники
 </button>
-<div class="collapse markdown-1" id="collapsePCAvis">
+<div class="collapse markdown-1" id="collapse4">
 
 ```python
+from sklearn.decomposition import PCA
 pca = PCA(n_components=2)
 pca.fit(X_std)
 X_nd = pca.transform(X_std)
 ```
-
 </div>
 
 {% include_relative pca.html %}
@@ -91,20 +137,58 @@ X_nd = pca.transform(X_std)
 
 ### Кластеризация методом k-средних
 
+<hr class="zero-everything">
+<button class="btn btn-primary btn-sm " type="button" data-toggle="collapse" data-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
+	<i class="fas fa-angle-down"></i> показать исходники
+</button>
+<div class="collapse markdown-1" id="collapse5">
+
+```python
+from sklearn.cluster import KMeans
+kmeans = KMeans(n_clusters=10)
+X_clustered = kmeans.fit_predict(X_std)
+```
+</div>
 {% include_relative k-means.html %}
+<hr>
 
 ## Линейный дискриминатор Фишера (LDA)
 
 ### Визуализация
 
+<hr class="zero-everything">
+<button class="btn btn-primary btn-sm " type="button" data-toggle="collapse" data-target="#collapse6" aria-expanded="false" aria-controls="collapse6">
+	<i class="fas fa-angle-down"></i> показать исходники
+</button>
+<div class="collapse markdown-1" id="collapse6">
+
+```python
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis as LDA
+lda = LDA(n_components=2)
+X_LDA_2D = lda.fit_transform(X_std, Y)
+```
+</div>
 {% include_relative lda.html %}
+<hr>
 
 ## Стохастическое вложение соседей (T-SNE)
 
 ### Визуализация
 
-{% include_relative t-sne.html %}
+<hr class="zero-everything">
+<button class="btn btn-primary btn-sm " type="button" data-toggle="collapse" data-target="#collapse7" aria-expanded="false" aria-controls="collapse7">
+	<i class="fas fa-angle-down"></i> показать исходники
+</button>
+<div class="collapse markdown-1" id="collapse7">
 
+```python
+from sklearn.manifold import TSNE
+tsne = TSNE(n_components=2)
+tsne_results = tsne.fit_transform(X_std)
+```
+</div>
+{% include_relative t-sne.html %}
+<hr>
 
 [klyushin]: http://om.univ.kiev.ua/ua/user-15/Pattern
 [klyushin-lda]: http://om.univ.kiev.ua/users_upload/15/upload/file/pr_lecture_09.pdf
