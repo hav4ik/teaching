@@ -89,3 +89,15 @@ footer {
 .content a:active {
   color:#85144b
 }
+
+blockquote {
+    font-style:italic !important;
+    border-left:8px solid #222 !important;
+    padding-left:20px !important;
+    margin: 0 !important;
+}
+@media only screen and (min-width: 48em) {
+	blockquote {
+		margin-left:-28px !important;
+	}
+}
