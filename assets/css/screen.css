@@ -73,3 +73,19 @@ footer {
     margin-top: 0;
   }
 }
+
+.content a {
+  text-decoration: underline
+}
+.content a:link {
+  color:#282828;
+}
+.content a:visited {
+  color:#383838
+}
+.content a:hover {
+  color:#FF4136
+}
+.content a:active {
+  color:#85144b
+}

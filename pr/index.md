@@ -3,6 +3,11 @@ title: 0. Вступ
 layout: chapter
 collection: pattern-recognition
 order: 0
+
+author:
+  name: Chan Kha Vu
+  link: https://hav4ik.github.io
+date: 24.04.2019
 ---
 
 {% assign lectures = site.pages | where: 'collection', 'pattern-recognition' %}

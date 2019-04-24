@@ -3,6 +3,11 @@ title: 1. Снижение размерности данных
 layout: chapter
 collection: pattern-recognition
 order: 1
+
+author:
+  name: Chan Kha Vu
+  link: https://hav4ik.github.io
+date: 24.04.2019
 ---
 
 [![Open In Colab]({{ site.baseurl }}/assets/badges/colab-badge.svg)](https://colab.research.google.com/drive/1FI2d2_WbCRL9dz03HTkJ85LVvgEmGNL3)
