@@ -1,0 +1,120 @@
+<script src="http://d3js.org/d3.v4.js"></script>
+<script>
+d3.selection.prototype.moveToFront = function() {  
+  return this.each(function(){
+    this.parentNode.appendChild(this);
+  });
+};
+random_img = "https://raw.githubusercontent.com/hav4ik/teaching/gh-pages/pr/02-svm-with-hog/Lenna.jpg";
+
+// set the dimensions and margins of the graph
+var margin = {top: 80, right: 25, bottom: 30, left: 40},
+  width = 450, //- margin.left - margin.right,
+  height = 450;// - margin.top - margin.bottom;
+
+// append the svg object to the body of the page
+var svg = d3.select("#hogvis_image")
+.append("svg")
+  .attr("width", width * 2 + margin.left + margin.right)
+  .attr("height", height + margin.top + margin.bottom)
+
+svg.append("image")
+  .attr("xlink:href", random_img)
+  .attr("width", width)
+  .attr("height", height)
+
+// Add title to graph
+var hog_vis = svg
+  .append("svg")
+    .attr("x", width + 20)
+    .attr("y", 0)
+    .attr("width", 260)
+    .attr("height", 260)
+    .style("opacity", 1)
+    .style("fill-opacity", 0)
+    .style("stroke-width", 15)
+    .style("stroke", "orange")
+
+var vis_connect = svg
+  .append("line")
+    .attr("x1", hog_vis.attr("x"))
+    .attr("y1", hog_vis.attr("y") + hog_vis.attr("height")/2)
+    .attr("x2", 50)
+    .attr("y2", 50)
+    .attr("stroke-width", 2)
+    .attr("stroke", "black")
+    .attr("opacity", 0)
+
+// "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/heatmap_data.csv"
+//Read the data
+d3.tsv("https://raw.githubusercontent.com/hav4ik/temp/master/data.tsv", function(data) {
+  // Labels of row and columns -> unique identifier of the column called 'group' and 'variable'
+  var myGroups = d3.map(data, function(d){return d.c}).keys().sort()
+  var myVars = d3.map(data, function(d){return d.r}).keys().sort()
+
+  // Build X scales and axis:
+  var x1 = d3.scaleBand()
+    .range([ 0, width ])
+    .domain(myGroups);
+
+  // Build Y scales and axis:
+  var y1 = d3.scaleBand()
+    .range([ 0, height ])
+    .domain(myVars);
+
+  // Build color scale
+  var myColor = d3.scaleLinear()
+    .range(["white", "#69b3a2"])
+    .domain([1,100])
+
+  // Three function that change the tooltip when user hover / move / leave a cell
+  var mouseover = function(d) {
+    hog_vis
+      .style("opacity", 1)
+      .html("<svg>" + d.svg_script + "</svg>")
+      .attr("viewBox", "0 0 600 600")
+      .attr("preserveAspectRatio", "xMinYMin meet")
+    d3.select(this)
+      .attr("rx", 4)
+      .attr("ry", 4)
+      .style("fill-opacity", 0)
+      .style("stroke-width", 4)
+      .style("stroke", "orange")
+      .moveToFront()
+  }
+  var mousemove = function(d) {
+  }
+  var mouseleave = function(d) {
+    vis_connect
+      .style("opacity", 0)
+    hog_vis
+      .style("opacity", 0)
+    d3.select(this)
+      .attr("rx", 0)
+      .attr("ry", 0)
+      .style("fill-opacity", 0.15)
+      .style("stroke-width", 0.5)
+      .style("stroke", "#eee")
+  }
+
+  // add the squares
+  svg.selectAll()
+    .data(data, function(d) {return d.c+':'+d.r;})
+    .enter()
+    .append("rect")
+      .attr("x", function(d) { return x1(d.c) })
+      .attr("y", function(d) { return y1(d.r) })
+      .attr("rx", 0)
+      .attr("ry", 0)
+      .attr("width", x1.bandwidth() )
+      .attr("height", y1.bandwidth() )
+      .style("fill", function(d) {return myColor(69)} )
+      .style("fill-opacity", 0.15)
+      .style("stroke-width", 0.5)
+      .style("stroke", "#eee")
+    .on("mouseover", mouseover)
+    .on("mousemove", mousemove)
+    .on("mouseleave", mouseleave)
+
+});
+</script>
