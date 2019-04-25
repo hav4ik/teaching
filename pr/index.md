@@ -1,5 +1,5 @@
 ---
-title: 0. Вступ
+title: 0. Введение
 layout: chapter
 collection: pattern-recognition
 order: 0
@@ -10,6 +10,8 @@ author:
 date: 24.04.2019
 ---
 
+## Содержание:
+
 {% assign lectures = site.pages | where: 'collection', 'pattern-recognition' %}
 {% assign lectures_sorted = lectures | sort: 'order' %}
 
@@ -18,3 +20,6 @@ date: 24.04.2019
   <li><a href="{{ site.baseurl }}{{ p.url }}">{{ p.title }}</a></li>
 {% endfor %}
 </ul>
+
+
+
