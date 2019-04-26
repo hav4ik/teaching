@@ -10,7 +10,8 @@ author:
 date: 24.04.2019
 ---
 
-The chart below is responsive.
 
 <div id="hogvis_image"></div>
 {% include_relative hog_vis.html %}
+
+<hr>
