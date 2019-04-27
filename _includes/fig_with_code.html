@@ -6,9 +6,13 @@
 <button class="btn btn-primary btn-sm zero-margin" type="button" data-toggle="collapse" data-target="#{{ id }}" aria-expanded="false" aria-controls="{{ id }}">
   <i class="fas fa-angle-down"></i> показать исходники
 </button>
+<a href="{{ colab }}" style="text-decoration: none; color:inherit" class="btn btn-outline-success btn-sm zero-margin" type="button">
+  <i class="fas fa-link"></i> открыть в Colab
+</a>
+
 <div class="collapse markdown-1" id="{{ id }}">
 {{ code | markdownify }}
 </div>
 
-{{ fig | markdownify }}
+{{ fig }}
 <hr>
