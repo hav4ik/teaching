@@ -102,16 +102,22 @@
           <h1>{{ page.title }}</h1>
           <hr style="margin-bottom: 10px">
           <div class="row">
-            <div class="col-sm-6 text-right">
+            <div class="col-sm-3 text-left">
               <span style="color: #666; font-weight: 400; font-size: 14px;">автор:</span>
               <a href="{{ page.author.link }}" style="text-decoration: none; font-weight: 450; font-size: 14px;">
                 {{ page.author.name }}
               </a>
             </div>
-            <div class="col-sm-6 text-left">
-                <span style="color: #666; font-weight: 400; font-size: 14px;">дата:</span>
-              <a style="text-decoration: none; font-weight: 450; font-size: 14px;">
-                {{ page.date }}
+            <div class="col-sm-6 text-center">
+              <span style="color: #666; font-weight: 400; font-size: 14px;">предмет:</span>
+              <a href="{{ page.course.link }}" style="text-decoration: none; font-weight: 450; font-size: 14px;">
+                {{ page.course.name }}
+              </a>
+            </div>
+            <div class="col-sm-3 text-right">
+              <span style="color: #666; font-weight: 400; font-size: 14px;">лектор:</span>
+              <a href="{{ page.lector.link }}" style="text-decoration: none; font-weight: 450; font-size: 14px;">
+                {{ page.lector.name }}
               </a>
             </div>
           </div>
