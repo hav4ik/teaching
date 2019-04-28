@@ -15,9 +15,9 @@ lector:
   link: http://om.univ.kiev.ua/ua/user-15
 ---
 
-[![Open In Colab]({{ site.baseurl }}/assets/badges/colab-badge.svg)](https://colab.research.google.com/drive/1FI2d2_WbCRL9dz03HTkJ85LVvgEmGNL3)
-[![Github]({{ site.baseurl }}/assets/badges/github.svg)](#)
-[![GitHub issues](https://img.shields.io/github/issues/Naereen/StrapDown.js.svg)](https://github.com/hav4ik/teaching/issues)
+[![Open In Colab]({{ site.baseurl }}/assets/badges/colab-badge.svg)](https://colab.research.google.com/github/hav4ik/teaching/blob/master/pr/01-dimensionality-reduction/demo.ipynb)
+[![Github]({{ site.baseurl }}/assets/badges/github.svg)](https://github.com/hav4ik/teaching/blob/master/pr/01-dimensionality-reduction/demo.ipynb)
+[![GitHub issues](https://img.shields.io/github/issues/hav4ik/teaching.svg)](https://github.com/hav4ik/teaching/issues/)
 
 > Данный материал является дополнением к [лекциям проф. Клюшин Д. А.][klyushin] по распознаванию образов, а именно &mdash; к лекции о [линейном дискриминаторе Фишера][klyushin-lda].
 
@@ -79,7 +79,8 @@ for digit in range(10):
 {% capture fig %}
 <img src="mnist-samples.png" alt="drawing" width="100%"/>
 {% endcapture %}
-{% include fig_with_code.html code=code fig=fig id="fig1" %}
+{% assign colab = "https://colab.research.google.com/github/hav4ik/teaching/blob/master/pr/01-dimensionality-reduction/demo.ipynb#scrollTo=g5xp0TcYXibO" %}
+{% include fig_with_code.html code=code fig=fig colab=colab id="fig1" %}
 
 Перед тем как приступать с следующим действиям, неплохо было бы нормализировать наши данные. Ведь они пока лежат в диапазоне `0 .. 255` &mdash; неочень удобный диапазон. Так же, поскольку у нас ограниченное количество вычислительной мощности, будем ограничиваться лишь `6000` семплами датасета.
 
@@ -122,7 +123,8 @@ cum_var_exp = np.cumsum(var_exp) # Cumulative explained variance
 {% capture fig %}
 {% include_relative eigenvals.html %}
 {% endcapture %}
-{% include fig_with_code.html code=code fig=fig id="fig2" %}
+{% assign colab = "https://colab.research.google.com/github/hav4ik/teaching/blob/master/pr/01-dimensionality-reduction/demo.ipynb#scrollTo=rbaZzxm9XibT" %}
+{% include fig_with_code.html code=code fig=fig colab=colab id="fig2" %}
 
 Можем заметить следующее: собственные значения (чёрные точки) уменьшаются експоненциально. Это означает, что некоторые направления намного "важнее" других &mdash; если представить множество наших точек (изображений), то такое множество наиболее "растянуто" по этим направлениям.
 
@@ -142,7 +144,8 @@ for i in range(n_row * n_col):
 {% capture fig %}
 <img src="eigenvecs.png" alt="drawing" width="100%"/>
 {% endcapture %}
-{% include fig_with_code.html code=code fig=fig id="fig3" %}
+{% assign colab = "https://colab.research.google.com/github/hav4ik/teaching/blob/master/pr/01-dimensionality-reduction/demo.ipynb#scrollTo=vaYb97EHXibe" %}
+{% include fig_with_code.html code=code fig=fig colab=colab id="fig3" %}
 
 Визуально можно увидеть, что вектора с наибольшим собственным значением выглядит как "шаблон" для некоторых цифр, в то время как последние вектора с меньшими собственными значениями визуально не несут никакого семантического значения.
 
@@ -169,7 +172,8 @@ X_nd = pca.transform(X_std)
 {% capture fig %}
 {% include_relative pca.html %}
 {% endcapture %}
-{% include fig_with_code.html code=code fig=fig id="fig7" %}
+{% assign colab = "https://colab.research.google.com/github/hav4ik/teaching/blob/master/pr/01-dimensionality-reduction/demo.ipynb#scrollTo=pwgpoKblXibl" %}
+{% include fig_with_code.html code=code colab=colab fig=fig id="fig7" %}
 
 По визуализации сверху видим, что PCA неплохо справляется с задачей поиска наиболее выразительной проекции &mdash; можем чётко видеть отдельные кластеры цифр.
 
@@ -209,7 +213,8 @@ X_clustered = kmeans.fit_predict(X_std)
 {% capture fig %}
 {% include_relative k-means.html %}
 {% endcapture %}
-{% include fig_with_code.html code=code fig=fig id="fig4" %}
+{% assign colab = "https://colab.research.google.com/github/hav4ik/teaching/blob/master/pr/01-dimensionality-reduction/demo.ipynb#scrollTo=CjhXHiRuXicA&line=2&uniqifier=1" %}
+{% include fig_with_code.html code=code fig=fig colab=colab id="fig4" %}
 
 Следует заметить, что связку PCA + KMeans используют тогда, когда мы примерно знаем количество классов, но не имеем никакой информации о наших данных. К тому же, KMeans работает плохо для тесно расположенных кластеров, как показано сверху.
 
@@ -290,7 +295,8 @@ X_LDA_2D = lda.fit_transform(X_std, Y)
 {% capture fig %}
 {% include_relative lda.html %}
 {% endcapture %}
-{% include fig_with_code.html code=code fig=fig id="fig5" %}
+{% assign colab = "https://colab.research.google.com/github/hav4ik/teaching/blob/master/pr/01-dimensionality-reduction/demo.ipynb#scrollTo=CjhXHiRuXicA&line=2&uniqifier=1" %}
+{% include fig_with_code.html code=code fig=fig colab=colab id="fig5" %}
 
 Можно увидеть на этом графике, что кластеры более чётко отделены и сгруппированы по сравнению с PCA. Это ожидаемо &mdash; ведь PCA не требует информации о классах, и свои плюсы проявляет как раз там, где неизвестны разметки данных. Выбираем нужный инструмент в зависимости от задачи.
 
@@ -384,7 +390,8 @@ tsne_results = tsne.fit_transform(X_std)
 {% capture fig %}
 {% include_relative t-sne.html %}
 {% endcapture %}
-{% include fig_with_code.html code=code fig=fig id="fig6" %}
+{% assign colab = "https://colab.research.google.com/github/hav4ik/teaching/blob/master/pr/01-dimensionality-reduction/demo.ipynb#scrollTo=CjhXHiRuXicA&line=2&uniqifier=1" %}
+{% include fig_with_code.html code=code fig=fig colab=colab id="fig6" %}
 
 Несмотря на то что **t-SNE** относится к классу алгоритмов без учителя, данный метод успешно выделило основные кластеры изображения рукописных цифр. Следует заметить, что он, как и **PCA**, ничего не знает о настоящей разметке данных.
 

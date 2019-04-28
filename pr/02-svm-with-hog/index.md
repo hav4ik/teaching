@@ -24,7 +24,7 @@ lector:
 
 [![Open In Colab]({{ site.baseurl }}/assets/badges/colab-badge.svg)](#)
 [![Github]({{ site.baseurl }}/assets/badges/github.svg)](#)
-[![GitHub issues](https://img.shields.io/github/issues/Naereen/StrapDown.js.svg)](https://github.com/hav4ik/teaching/issues)
+[![GitHub issues](https://img.shields.io/github/issues/hav4ik/teaching.svg)](https://github.com/hav4ik/teaching/issues)
 
 > Данный материал является дополнением к [лекциям проф. Клюшин Д. А.][klyushin] по распознаванию образов, а именно &mdash; к лекции о [методе опорных векторов (SVM)][klyushin-svm].
 
